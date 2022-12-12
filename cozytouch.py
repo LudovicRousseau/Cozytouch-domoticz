@@ -1880,16 +1880,6 @@ Déroulement du script
 '''
 print(("¤¤¤¤ Demarrage script cozytouch <=> domoticz version "+str(version)+" (debug :"+str(debug)+")"))
 
-pvma = sys.version_info.major
-pvmi = sys.version_info.minor
-pvmu = sys.version_info.micro
-if debug:
-    print(("Version python : "+str(pvma)+"."+str(pvmi)+"."+str(pvmu)))
-
-if not (pvma == 2 and  pvmi== 7):
-    print("!!!! Echec test version python, ce script nécessite python 2.7.x (idealement 2.7.15)")
-    sys.exit(errno.ENOENT)
-
 # Test de présence du fichier de sauvegarde cozytouch et virtual hardware
 if test_exist_cozytouch_domoticz_hw_and_backup_store():
     print("Test présence du fichier de sauvegarde cozytouch et virtual hardware domoticz OK\n")
