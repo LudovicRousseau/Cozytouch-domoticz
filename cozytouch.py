@@ -408,7 +408,7 @@ def cozytouch_login(login,password):
         }
     reqjwt=requests.get(url_atlantic+'/magellan/accounts/jwt',headers=headers)
 
-    jwt=reqjwt.content.replace('"','')
+    jwt=reqjwt.content.decode('utf-8').replace('"','')
     data={
         'jwt':jwt
         }
