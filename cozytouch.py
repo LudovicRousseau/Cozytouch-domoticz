@@ -613,7 +613,7 @@ def decouverte_devices():
     data = cozytouch_GET('getSetup')
 
     if debug==2:
-	    f1=open('./dump_cozytouch.txt', 'w+')
+	    f1=open('./dump_cozytouch.json', 'w+')
 	    f1.write((json.dumps(data, indent=4, separators=(',', ': '))))
 	    f1.close()
 
