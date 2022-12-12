@@ -35,7 +35,7 @@ version=5.35
 
 debug=2 # 0 : pas de traces debug / 1 : traces requêtes http / 2 : dump data json reçues du serveur cozytouch
 
-domoticz_ip='192.168.xx.xx'
+domoticz_ip='192.168.0.1'
 domoticz_port='8080'
 
 login="xxxxx"
@@ -112,6 +112,9 @@ Fonctions génériques pour Domoticz
 def domoticz_write_log(message):
     """Fonction d'ecriture log dans Domoticz
     """
+    print("domoticz_write_log", message)
+    return
+
     myurl=url_domoticz+'command&param=addlogmessage&message='+message
     req=requests.get(myurl)
     if debug:
@@ -127,6 +130,9 @@ def domoticz_write_device_analog(valeur, idx):
     valeur=str(valeur)
     idx=str(idx)
 
+    print("domoticz_write_device_analog:", value, idx)
+    return
+
     myurl=url_domoticz+'command&param=udevice&idx='+idx+'&nvalue=0&svalue='+valeur
     req=requests.get(myurl)
     if debug:
@@ -141,6 +147,9 @@ def domoticz_write_device_switch_onoff(etat, idx):
     etat=str(etat)
     idx=str(idx)
 
+    print("domoticz_write_device_switch_onoff:", etat, idx)
+    return
+
     myurl=url_domoticz+'command&param=switchlight&idx='+idx+'&switchcmd='+etat
     req=requests.get(myurl)
     if debug:
@@ -153,6 +162,9 @@ def domoticz_write_device_switch_selector(level, idx):
     ''' Fonction d'écriture device selector switch
     '''
     level=str(level)
+
+    print("domoticz_write_device_switch_selector:", level, idx)
+    return
 
     myurl=url_domoticz+'command&param=switchlight&idx='+idx+'&switchcmd=Set%20Level&level='+level
     req=requests.get(myurl)
@@ -167,6 +179,9 @@ def domoticz_read_device_analog(idx):
     renvoie un flottant quel que soit le type de device
     '''
     idx=str(idx)
+
+    print("domoticz_read_device_analog:", idx)
+    return None
 
     myurl=url_domoticz+'devices&rid='+idx
     req=requests.get(myurl)
@@ -190,6 +205,9 @@ def domoticz_read_device_switch_selector(idx):
     '''
     idx = str(idx).decode("utf-8")
 
+    print("domoticz_read_device_switch_selector:", idx)
+    return 
+
     myurl=url_domoticz+'devices&rid='+idx
     req=requests.get(myurl)
     if debug:
@@ -211,6 +229,9 @@ def domoticz_read_user_variable(idx):
     '''
     idx=str(idx)
 
+    print("domoticz_read_user_variable:", idx)
+    return None
+
     myurl=url_domoticz+'command&param=getuservariables'
     req=requests.get(myurl)
     if debug:
@@ -230,6 +251,10 @@ def domoticz_create_user_variable(nom_variable, valeur_variable):
     ''' création d'une variable utilisateur dans domoticz
     renvoie l'idx créé
     '''
+    print("domoticz_create_user_variable:", nom_variable,
+          valeur_variable)
+    return None
+
 	# Requete de création de variable
     myurl=url_domoticz+'command&param=adduservariable&vname='+nom_variable+'&vtype=0&vvalue='+valeur_variable
     req=requests.get(myurl)
@@ -287,6 +312,9 @@ def domoticz_rename_device(idx, nom):
     nom = str(nom)
     # renomme un device domoticz
 
+    print("domoticz_rename_device:", idx, nom)
+    return None
+
     myurl=url_domoticz+'command&param=renamedevice&idx='+idx+'&name='+nom
     req=requests.get(myurl)
     if debug:
@@ -298,6 +326,9 @@ def domoticz_rename_device(idx, nom):
 def domoticz_add_virtual_harware():
     ''' Fonction de création du virtual hardware (matériel/dummy)
     '''
+
+    print("domoticz_add_virtual_harware")
+    return None
 
     myurl=url_domoticz+'command&param=addhardware&htype=15&port=1&name=Cozytouch_V'+str(version)+'&enabled=true'
     req=requests.get(myurl)
@@ -318,6 +349,9 @@ def domoticz_add_virtual_harware():
 def domoticz_add_virtual_device(idx,typ,nom,option='none'):
     ''' Fonction de création de device virtuel
     '''
+    print("domoticz_add_virtual_device:", idx, typ, nom, option)
+    return None
+
     if option == 'none' :
         req_option = ''
     else :
@@ -505,6 +539,8 @@ def test_exist_cozytouch_domoticz_hw_and_backup_store():
     else :
         save_idx = var_restore('save_idx')
         print(("idx hardware cozytouch dans le fichier de sauvegarde de la configuration : "+str(save_idx)))
+
+        return True
 
         # Test si le virtual hardware existe avec le même numéro dans domoticz
         myurl='http://'+domoticz_ip+':'+domoticz_port+'/json.htm?type=hardware'
