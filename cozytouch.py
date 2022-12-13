@@ -280,7 +280,7 @@ def extract_data_from_json(data):
     output = list()
     for field in fields:
         output.append("{}={}".format(field, values[field]))
-    print("ChauffeEau", ", ".join(output))
+    print("ChauffeEau", ",".join(output))
 
 if __name__ == "__main__":
     data = get_data_from_server()
