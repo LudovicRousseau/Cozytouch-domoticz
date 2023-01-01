@@ -260,7 +260,6 @@ def get_data_from_server():
 def extract_data_from_json(data):
     fields = ("core:BottomTankWaterTemperatureState",
               "core:RemainingHotWaterState",
-              "core:V40WaterVolumeEstimationState",
               "modbuslink:MiddleWaterTemperatureState",
               "modbuslink:PowerHeatElectricalState")
 
