@@ -281,7 +281,9 @@ def extract_data_from_json(data):
 if __name__ == "__main__":
     data = get_data_from_server()
 
-    with open("dump_cozytouch.json", "w") as f1:
-        f1.write(json.dumps(data, indent=4, separators=(",", ": ")))
+    if debug == 2:
+        # dump in a JSON file
+        with open("dump_cozytouch.json", "w") as f1:
+            f1.write(json.dumps(data, indent=4, separators=(",", ": ")))
 
     extract_data_from_json(data)
