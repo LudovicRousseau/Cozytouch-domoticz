@@ -118,7 +118,8 @@ def var_restore(var_str, format_str=False):
 
 def http_error(code_erreur, texte_erreur):
     """Evaluation des exceptions HTTP"""
-    print(("Erreur HTTP " + str(code_erreur) + " : " + texte_erreur))
+    if debug:
+        print("Erreur HTTP " + str(code_erreur) + " : " + texte_erreur)
 
 
 """
@@ -163,7 +164,8 @@ def cozytouch_login(login, password):
         )
 
     if jsession.status_code == 200:  # Réponse HTTP 200 : OK
-        print("Authentification serveur cozytouch OK")
+        if debug:
+            print("Authentification serveur cozytouch OK")
         cookies = dict(
             JSESSIONID=(jsession.cookies["JSESSIONID"])
         )  # Récupération cookie ID de session
