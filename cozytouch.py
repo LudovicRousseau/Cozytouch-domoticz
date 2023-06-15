@@ -260,7 +260,7 @@ def extract_data_from_json(data):
               "modbuslink:MiddleWaterTemperatureState",
               "modbuslink:PowerHeatElectricalState")
 
-    devices = data["setup"]["devices"]
+    devices = data["devices"]
     values = dict()
     for device in devices:
         if device["label"] == "LINEO":
