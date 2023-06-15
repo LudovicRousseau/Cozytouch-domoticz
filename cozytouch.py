@@ -68,10 +68,9 @@ Variables globlales
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
-global url_cozytouchlog, url_cozytouch, url_atlantic, cookies, cozytouch_save, current_path
+global url_cozytouchlog, url_atlantic, cookies, cozytouch_save, current_path
 
 url_cozytouchlog = "https://ha110-1.overkiz.com/enduser-mobile-web/enduserAPI"
-url_cozytouch = "https://ha110-1.overkiz.com/enduser-mobile-web/externalAPI/json/"
 url_atlantic = "https://apis.groupe-atlantic.com"
 
 current_path = os.path.dirname(os.path.abspath(__file__))  # repertoire actuel
