@@ -185,7 +185,7 @@ def cozytouch_GET(json):
         "Host": "ha110-1.overkiz.com",
         "Connection": "Keep-Alive",
     }
-    myurl = url_cozytouch + json
+    myurl = url_cozytouchlog + json
     cookies = var_restore("cookies")
     req = requests.get(myurl, headers=headers, cookies=cookies)
     if debug:
@@ -211,7 +211,7 @@ def decouverte_devices():
         print("**** Decouverte devices ****")
 
     # Renvoi toutes les données du cozytouch
-    data = cozytouch_GET("getSetup")
+    data = cozytouch_GET("/setup")
 
     return data
 
@@ -229,7 +229,7 @@ def get_data_from_server():
         print(
             "**** Tentative interrogation serveur Cozytouch sans login, avec cookie login précédent ****"
         )
-    if cozytouch_GET("refreshAllStates"):
+    if cozytouch_GET("/setup"):
         if debug:
             print("Requete de test sans login reussie, bypass login\n")
     else:
@@ -246,11 +246,11 @@ def get_data_from_server():
             raise Exception("!!!! Echec connexion serveur Cozytouch")
 
         # Rafraichissement états
-        if cozytouch_GET("refreshAllStates"):
+        if cozytouch_GET("/setup"):
             if debug:
-                print("Requete refreshAllStates reussie")
+                print("Requete setup reussie")
         else:
-            raise Exception("!!!! Echec requete refreshAllStates")
+            raise Exception("!!!! Echec requete setup")
 
     time.sleep(2)
     data = decouverte_devices()
@@ -263,7 +263,7 @@ def extract_data_from_json(data):
               "modbuslink:MiddleWaterTemperatureState",
               "modbuslink:PowerHeatElectricalState")
 
-    devices = data["setup"]["devices"]
+    devices = data["devices"]
     values = dict()
     for device in devices:
         if device["label"] == "LINEO":
