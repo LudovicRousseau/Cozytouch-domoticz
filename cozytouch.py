@@ -190,9 +190,7 @@ def cozytouch_GET(json):
     cookies = var_restore("cookies")
     req = requests.get(myurl, headers=headers, cookies=cookies)
     if debug:
-        print(
-            ("  ".join(("GET-> ", myurl, " : ", str(req.status_code))).encode("utf-8"))
-        )
+        print("  ".join(("GET-> ", myurl, " : ", str(req.status_code))))
 
     if req.status_code == 200:  # Réponse HTTP 200 : OK
         data = req.json()
